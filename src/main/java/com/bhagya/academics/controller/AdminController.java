@@ -20,8 +20,4 @@ public class AdminController {
     public ResponseEntity<String> login(@RequestBody @Valid LoginRequest request){
         return ResponseEntity.ok(adminservice.login(request));
     }
-
-//    @PostMapping("/")
-
-
 }
