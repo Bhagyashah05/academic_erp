@@ -21,7 +21,13 @@ public class StudentController {
 
     @GetMapping("/getstudentsbydomain/{domainId}")
     public ResponseEntity<List<StudentResponse>> getStudentsByDomain(@PathVariable int domainId) {
-        return ResponseEntity.ok(studentService.getStudentsByDomain(domainId));
+        try {
+            List<StudentResponse> students = studentService.getStudentsByDomain(domainId);
+            return ResponseEntity.ok(students);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(null);
+        }
     }
-
 }
+
