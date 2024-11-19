@@ -16,7 +16,7 @@ import jakarta.validation.Valid;
 public class AuthenticationController {
     private final AdminService adminservice;
 
-    @PostMapping("/login")
+    @PostMapping("admin/login")
     public ResponseEntity<String> login(@RequestBody @Valid LoginRequest request){
         return ResponseEntity.ok(adminservice.login(request));
     }

@@ -6,6 +6,7 @@ import com.bhagya.academics.exception.UserNotFoundException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Null;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,12 @@ public class AdminService {
 
     public String login(LoginRequest request) {
         User user=getUser(request.email());
+        if(user== null){
+            return "User not found";
+        }
+        if(!user.getRole().equals("Admin")){
+            return "Only Admin can Login";
+        }
         if(!encryptionService.validates(request.password(), user.getPassword())) {
             return "Wrong Password or Email";
         }

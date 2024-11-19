@@ -19,6 +19,6 @@ public class UserService {
         User user = customerMapper.toCustomer(request);
         user.setPassword(encryptionService.encode(user.getPassword()));
         userRepo.save(user);
-        return "Customer Created Successfully";
+        return "User Created Successfully";
     }
 }
