@@ -16,11 +16,11 @@ public record LoginRequest(
         @NotBlank(message = "Password should be present")
         @Size(min = 6, max = 12)
         @JsonProperty("password")
-        String password,
+        String password
 
-        @NotEmpty(message = "role should be present")
-        @JsonProperty("role")
-        String role
+//        @NotEmpty(message = "role should be present")
+//        @JsonProperty("role")
+//        String role
 
 ) {
 }

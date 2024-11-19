@@ -27,7 +27,7 @@ public class AdminService {
         if(user== null){
             return "User not found";
         }
-        if(!user.getRole().equals("Admin")){
+        if(!user.getRole().equals(("Admin"))){
             return "Only Admin can Login";
         }
         if(!encryptionService.validates(request.password(), user.getPassword())) {
