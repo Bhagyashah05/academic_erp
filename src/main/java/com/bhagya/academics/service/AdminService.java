@@ -1,8 +1,10 @@
 package com.bhagya.academics.service;
 
 import com.bhagya.academics.dto.LoginRequest;
+import com.bhagya.academics.dto.LoginResponse;
 import com.bhagya.academics.entity.User;
 import com.bhagya.academics.exception.UserNotFoundException;
+import com.bhagya.academics.helper.JWTHelper;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -20,21 +22,24 @@ public class AdminService {
 
     private final CustomerRepo customerRepo;
     private final EncryptionService encryptionService;
+    private final JWTHelper jwtHelper;
 
 
-    public String login(LoginRequest request) {
-        User user=getUser(request.email());
-        if(user== null){
-            return "User not found";
-        }
-        if(!user.getRole().equals(("Admin"))){
-            return "Only Admin can Login";
-        }
-        if(!encryptionService.validates(request.password(), user.getPassword())) {
-            return "Wrong Password or Email";
+    public LoginResponse login(LoginRequest request) {
+        User user = getUser(request.email());
+        if (user == null) {
+            throw new IllegalArgumentException("User not found");
         }
 
-        return "Done";
+        if (!user.getRole().equals("Admin")) {
+            throw new IllegalArgumentException("Only Admin can Login");
+        }
+
+        if (!encryptionService.validates(request.password(), user.getPassword())) {
+            throw new IllegalArgumentException("Wrong Password or Email");
+        }
+        String token = jwtHelper.generateToken(request.email());
+        return new LoginResponse(user.getUser_id(), user.getEmail(), user.getRole(), user.getName(),token);
     }
 
     private User getUser( String email) {

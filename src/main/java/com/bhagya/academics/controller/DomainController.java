@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/domain")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class DomainController {
     private final DomainService domainservice;
 

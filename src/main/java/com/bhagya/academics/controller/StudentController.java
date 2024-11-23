@@ -5,16 +5,14 @@ import com.bhagya.academics.dto.StudentResponse;
 import com.bhagya.academics.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/student")
+@CrossOrigin(origins = "http://localhost:3000")
 public class StudentController {
 
     private final StudentService studentService;
