@@ -1,6 +1,8 @@
 package com.bhagya.academics.exception;
 
-public class UserNotFoundException {
-    public UserNotFoundException(String format) {
+public class UserNotFoundException extends RuntimeException {
+
+    public UserNotFoundException(String message) {
+        super(message);
     }
 }
